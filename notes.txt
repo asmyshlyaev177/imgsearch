@@ -1,4 +1,6 @@
-{"url":"https://i.ytimg.com/vi/dWpGC6Fg0io/hqdefault.jpg","snippet":"Jas Patrick sings Snow Day starring LOLCats Funny Cats - YouTube","thumbnail":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNMCLSl2dHm87xTU6uMFZD0Jym2E-4lAaSdJzfc_6OkeB_CdF1vjgZZsR2","context":"https://www.youtube.com/watch?v=dWpGC6Fg0io"}
+{"url":"https://i.ytimg.com/vi/dWpGC6Fg0io/hqdefault.jpg","snippet":"Jas Patrick sings Snow Day starring LOLCats Funny Cats - YouTube","context":"https://www.youtube.com/watch?v=dWpGC6Fg0io"}
+
+encodeURIComponent('search request')
 
 const scrapper = require('puppeteer');
 var browser;
@@ -15,9 +17,6 @@ scrapper.launch({ignoreHTTPSErrors: true, headless: false}).then(async browser =
 });
 
 https://www.google.ru/search?q=cats&tbm=isch
-
-
-
 
 https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md
 https://gist.github.com/veb/c1beab69b5eb1b07123e5eaf55b80320
