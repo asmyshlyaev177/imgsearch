@@ -1,23 +1,51 @@
-{"url":"https://i.ytimg.com/vi/dWpGC6Fg0io/hqdefault.jpg","snippet":"Jas Patrick sings Snow Day starring LOLCats Funny Cats - YouTube","thumbnail":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNMCLSl2dHm87xTU6uMFZD0Jym2E-4lAaSdJzfc_6OkeB_CdF1vjgZZsR2","context":"https://www.youtube.com/watch?v=dWpGC6Fg0io"}
+{"thumbnail":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-0jEp_p8F_GovkBQRiFpW21nDi6Ydx_8p4ptts2g38IVdR5nk2BNOhtEF", "url":"https://i.ytimg.com/vi/dWpGC6Fg0io/hqdefault.jpg","snippet":"Jas Patrick sings Snow Day starring LOLCats Funny Cats - YouTube","context":"https://www.youtube.com/watch?v=dWpGC6Fg0io"}
+
+черио и пуппитер дрянь, парсить сложно и все поисковики усложняют задачу, или перехватывать запросы или использовать АПИ гугла
+bodyParser ???
+https://developers.google.com/custom-search/json-api/v1/overview
+
+encodeURIComponent('search request')
 
 const scrapper = require('puppeteer');
 var browser;
 var page;
+const mongo = require('mongodb').MongoClient;
+const uri = 'mongodb://127.0.0.1:27017/imgsearch';
+const bodyParser = require('body-parser');
+var divs;
+const cheerio = require('cheerio');
+var imgs = [];
+var block;
+var $;
+var img;
+var ireq =[];
 
 scrapper.launch({ignoreHTTPSErrors: true, headless: false}).then(async browser => {
 		var pages = await browser.pages();
 		pages.length ? page = pages[0] : page = await browser.newPage();
-		await page.goto('https://www.google.ru/search?q=cats&tbm=isch');
-		let divs = await page.$$eval('div.rg_bx.rg_di.rg_el.ivg-i', div => div);
-		console.log(divs.length);
-		// await page.screenshot({path: `screenshot-${new Date().getTime()}.png`});
-		await browser.close();
+
+		// await page.setRequestInterception(true);
+		
+		page.on('request', async resp => {
+			let data = await resp;
+			//ireq.push(resp);
+			//ireq.push(response);
+			if (data.resourceType === 'xhr') {
+				ireq.push(data);
+			}
+			//interceptedRequest.continue();
+			
+		});
+		
+		await page.goto('https://duckduckgo.com/?q=cats+funny+test&iar=images&iax=images&ia=images');
+  
+		// await page.click('i.detail__close');
+		//await browser.close();
 });
 
-https://www.google.ru/search?q=cats&tbm=isch
-
-
-
+ireq.length 
 
 https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md
 https://gist.github.com/veb/c1beab69b5eb1b07123e5eaf55b80320
+
+C:\Users\Alex>"c:\Program Files\MongoDB\Server\3.4\bin\mongod.exe"  --dbpath c:\node\imgsearch\data
